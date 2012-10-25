@@ -1,19 +1,30 @@
 from espeak import espeak
 from datetime import datetime
+import time
+import os
+
+espeak.synth("Starting")
+time.sleep(0.2)
+os.system('clear') 
+
 t = datetime.now().strftime("%k %M")
 
-message1 = "What is your name?"
-message2 = "How old are you?"
+message1 = ["What is your name?", "Hello "]
+message2 = "How old are you?", " you are "]
 
-print message1,
+print message1[0],
 reply1 = raw_input()
+time.sleep(2)
 
-print message2,
+print message2[0],
 reply2 = raw_input()
+time.sleep(2)
 
+print "%s %s, %s %s " %(message1[1], reply1, message2[1], reply2)
 
 prefix = "Hello world      "
+checkThea = reply1.replace("thea", "[[THEIuh]]")
+checkTHea = checkThea.replace("Thea", "[[THEIuh]]")
 
-checkThea = reply1.replace("thea", "THEI uh")
+espeak.synth("%s %s %s, %s %s " %(prefix, message1[1], checkThea, message2[1], reply2))
 
-espeak.synth("%s Hello %s, you are %s " %(prefix, checkThea, reply2))
