@@ -10,12 +10,14 @@ os.system('clear')
 t = datetime.now().strftime("%k %M")
 
 message1 = ["What is your name?", "Hello "]
-message2 = "How old are you?", " you are "]
+message2 = ["How old are you?", " you are "]
 
+espeak.synth(message1[0])
 print message1[0],
 reply1 = raw_input()
 time.sleep(2)
 
+espeak.synth(message2[0])
 print message2[0],
 reply2 = raw_input()
 time.sleep(2)
