@@ -10,7 +10,7 @@ speed = 5
 
 def checkbutton(speed):
 	if GPIO.input(11) and speed > 1:
-        speed = speed - 1	
+		speed = speed - 1	
     if GPIO.input(12) and speed < 10:
     	speed = speed + 1
     return speed                    
