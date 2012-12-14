@@ -19,9 +19,9 @@ while 1:
         
         for pin in pins:
                 checkbutton()
-                GPIO.output(pin, True)
-                sleep(speed * 0.1)
                 GPIO.output(pin, False)
+                sleep(speed * 0.1)
+                GPIO.output(pin, True)
         
 
 	
