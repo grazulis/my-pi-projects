@@ -13,7 +13,7 @@ def checkbutton(speed):
 		speed = speed - 1
 	if GPIO.input(12) and speed < 10:
 		speed = speed + 1
-    return speed                    
+	return speed                    
 
 while 1:
         pins = [13, 16, 15]
