@@ -15,18 +15,13 @@ def checkbutton():
 		speed = speed + 1
 		
 while 1:
-	checkbutton()
-        sleep(speed * 0.1)
-        GPIO.output(13, True)
-        GPIO.output(16, False)
-        checkbutton()
-	sleep(speed * 0.1)
-        GPIO.output(16, True)
-        GPIO.output(15, False)
-        checkbutton()
-	sleep(speed * 0.1)
-        GPIO.output(15, True)
-	GPIO.output(13, False)
-
+        pins = [13, 16, 15]
+        
+        for pin in pins:
+                checkbutton()
+                GPIO.output(pin, True)
+                sleep(speed * 0.1)
+                GPIO.output(pin, False)
+        
 
 	
