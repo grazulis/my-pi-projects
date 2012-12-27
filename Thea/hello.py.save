@@ -7,7 +7,7 @@ espeak.synth("Starting")
 time.sleep(0.5)
 os.system('clear') 
 
-# Prefix might be needed to cope with some isues with delay over HDMI
+
 t = ""
 prefix = "%s " %t
 
@@ -31,5 +31,4 @@ checkThea = checkThea.replace("Thea", "[[THEIuh]]")
 
 espeak.synth("%s %s %s, %s %s" %(prefix, message1[1], checkThea, message2[1], reply2))
 
-raw_input(">")
-
+raw_input(">
