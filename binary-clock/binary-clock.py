@@ -6,29 +6,34 @@
 # Written by G. D. Leeming, Dec. 2012
 
 
-#import smbus
-#import sys
-#import getopt
+import smbus
+import sys
+import getopt
 import time
 from time import strftime
  
-#bus = smbus.SMBus(0)
+bus = smbus.SMBus(1)
 
-#address = 0x20 # I2C address of MCP23017
-#bus.write_byte_data(0x20,0x00,0x00) # Set all of bank A to outputs 
-#bus.write_byte_data(0x20,0x01,0x00) # Set all of bank B to outputs 
+address = 0x20 # I2C address of MCP23017
+bus.write_byte_data(0x20,0x00,0x00) # Set all of bank A to outputs 
+bus.write_byte_data(0x20,0x01,0x00) # Set all of bank B to outputs 
 
-#def set_led(data,value,bank):
-#  if bank == 1:
-#   bus.write_byte_data(address,0x12,data)
-#  else:
-#   bus.write_byte_data(address,0x13,data)
-#  return
+def set_led(data,value,bank):
+ 
+  if value == '1':
+	print "Turning on %s %s" % (data, bank)
 
-displayArray = [13]
+  if bank == 1:
+   bus.write_byte_data(address,0x12,data)
+  else:
+   bus.write_byte_data(address,0x13,data)
+  return
+
+displayArray = []
 oldTime = "0000"
 
 def setTime(currentTime):
+	global displayArray
 	x = 0
 	checkArray = [2, 4, 3, 4] # This provides the structure for the LED format for HHMM
 	timeArray = []
@@ -60,11 +65,13 @@ def main():
 		if currentTime != oldTime:
 			setTime(currentTime)
 			for x in range(0,5):
+				print "Bank 0 %s %s" % (x, displayArray[x])
 				a = 1 << x 
-#				set_led(a,displayArray[x], 0)
+				set_led(a,displayArray[x], 0)
 			for x in range(6,12):
+				print "Bank 1 %s %s " % (x, displayArray[x])
 				a = 1 << x
-#				set_led(a, displayArray[x], 1)
+				set_led(a, displayArray[x], 1)
 			oldTime = currentTime
 
 if __name__ == "__main__":
