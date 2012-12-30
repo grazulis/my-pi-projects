@@ -1,5 +1,7 @@
-# Python script for a binay clock display Control via an MCP23017 I2C IO Expander Code based on LED Chaser 
-# project form SK Pang Electronics GNU GPL V3
+# Python script for a binay clock display
+# Control via an MCP23017 I2C IO Expander
+# Code based on LED Chaser project form SK Pang Electronics
+# GNU GPL V3
 
 # Written by G. D. Leeming, Dec. 2012
 
@@ -15,20 +17,23 @@ bus = smbus.SMBus(1)
 address = 0x20 # I2C address of MCP23017
 bus.write_byte_data(0x20,0x00,0x00) # Set all of bank A to outputs 
 bus.write_byte_data(0x20,0x01,0x00) # Set all of bank B to outputs 
-displayArray = []
-oldTime = "0000"
 
-def set_led(data,bank):
+def set_led(data,value,bank):
+  i = 0x13
+  if value == '
+	print "Turning on %s %s" % (address, bank)
+
   if bank == 1:
    bus.write_byte_data(address,0x12,data)
   else:
    bus.write_byte_data(address,0x13,data)
   return
 
+displayArray = []
+oldTime = "0000"
 
 def setTime(currentTime):
 	global displayArray
-	displayArray = []
 	x = 0
 	checkArray = [2, 4, 3, 4] # This provides the structure for the LED format for HHMM
 	timeArray = []
@@ -46,9 +51,7 @@ def setTime(currentTime):
 	print currentTime
 	print timeArray
 
-	#TODO Change so uses integers?
-	displayArray.append( list(''.join(timeArray))[:6] )
-	displayArray.append( list(''.join(timeArray))[6:] )
+	displayArray = list(''.join(timeArray))
 	print displayArray
 
 	return 
@@ -61,20 +64,14 @@ def main():
 		currentTime = strftime("%H%M")
 		if currentTime != oldTime:
 			setTime(currentTime)
-			banka = 0
-			bankb = 0
-			for x in range(0,6):
-				if displayArray[0][x] == "1":
-					a = 1 << x 
-					banka = banka + a	
-			print banka
-			set_led(banka, 0)
-			for x in range(0,7):
-				if displayArray[1][x] == "1":
-					a = 1 << x
-					bankb = bankb + a
-			print bankb	
-			set_led(bankb, 1)
+			for x in range(0,5):
+				print "Bank 0 %s %s" % (x, displayArray[x])
+				a = 1 << x 
+				set_led(a,displayArray[x], 0)
+			for x in range(6,12):
+				print "Bank 1 %s %s " % (x, displayArray[x])
+				a = 1 << x
+				set_led(a, displayArray[x], 1)
 			oldTime = currentTime
 
 if __name__ == "__main__":
