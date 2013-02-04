@@ -28,34 +28,34 @@ def set_led(data,bank):
 
 def setTime(currentTime):
 	global displayArray
+        #Returns array of binary values representing the time as hh,mm
 	displayArray = []
 	x = 0
 	checkArray = [2, 4, 3, 4] # This provides the structure for the LED format for HHMM
-	timeArray = []
-	
-	# Need to check if this is needed for, e.g. 0950 (9:50 in the morning)
-	#if len(currentTime) < 4:
-	#	currentTime = "0" + currentTime 
+
+	timeString = ""
+	currentTime = currentTime 
 
 	while x < 4:
 		binaryValue = str(bin(int(currentTime[x:x+1])))[2:]
 		while len(binaryValue) < checkArray[x]:
-			binaryValue = "0" + binaryValue
-		timeArray.append(binaryValue)				
+                        print binaryValue
+			binaryValue = "0" + binaryValue				
+                timeString = timeString + binaryValue
 		x=x+1
 	print currentTime
-	print timeArray
-
+	print timeString
+        
 	#TODO Change so uses integers?
-	displayArray.append( list(''.join(timeArray))[:6] )
-	displayArray.append( list(''.join(timeArray))[6:] )
+	displayArray.append( list(timeString)[:6] )
+	displayArray.append( list(timeString)[6:] )
 	print displayArray
 
 	return 
 
 def main():
 	global oldTime		
-	global displayArray
+	#global displayArray
 	while 1:
 		
 		currentTime = strftime("%H%M")
