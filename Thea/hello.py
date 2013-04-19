@@ -8,7 +8,7 @@ time.sleep(0.5)
 os.system('clear') 
 
 # Prefix might be needed to cope with some isues with delay over HDMI
-t = ""
+t = "hello world"
 prefix = "%s " %t
 
 message1 = ["What is your name?", "Hello "]
@@ -31,5 +31,7 @@ checkThea = checkThea.replace("Thea", "[[THEIuh]]")
 
 espeak.synth("%s %s %s, %s %s" %(prefix, message1[1], checkThea, message2[1], reply2))
 
-raw_input(">")
+while 1:
+	reply = raw_input(">")
+	espeak.synth("%s %s" %(prefix, reply))
 
