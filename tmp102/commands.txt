@@ -1,0 +1,44 @@
+|-------------------------------------------|
+| RASPBERRY PI IV BEGINNERS - TMP102 SENSOR |
+|-------------------------------------------|
+
+>>Stage 1<<
+
+1. sudo apt-get update
+
+2. sudo apt-get install i2c-tools
+
+3. sudo nano /etc/modules
+   add > i2c-bcm2708
+   add > i2c-dev
+
+4. Sudo reboot
+
+5. sudo usermod -a -G i2c pi
+
+6. logout
+
+7. i2cget -y 0 0x48 0x00 w	
+
+8. mkdir tmp102
+
+9. cd tmp102
+
+10. wget -O tmp102_files.tgz http://goo.gl/4uoNb
+
+11. tar -zxvf tmp102_files.tgz
+
+12. ./tmp102.sh
+
+13. watch ./tmp102.sh
+
+>>Stage 2<<
+
+14. COSM
+   XXXXX = Feed ID (sudo nano update.sh)
+   YYYYY = Datastreem ID (sudo nano blank.json)
+   ZZZZZ = ApiKey (sudo nano update.sh)
+   
+15. crontab -e 
+
+16. Add to cronjobs "* * * * * sudo /home/pi/tmp102/update.sh"
