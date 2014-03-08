@@ -8,7 +8,7 @@ time.sleep(0.5)
 os.system('clear') 
 
 # Prefix might be needed to cope with some isues with delay over HDMI
-t = "hello world"
+t = ""
 prefix = "%s " %t
 
 message1 = ["What is your name?", "Hello "]
